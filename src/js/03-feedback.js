@@ -7,8 +7,8 @@ let lastFeedback = JSON.parse(localStorage.getItem(keys.lsFeedback)) || {};
 
 function updateFeedback() {
   const { email, message } = form.elements;
-  email.value = lastFeedback.lastEmail || '';
-  message.value = lastFeedback.lastMessage || '';
+  email.value = lastFeedback.email || '';
+  message.value = lastFeedback.message || '';
 }
 
 const throttledUpdate = throttle(updateFeedback, 500);
@@ -19,8 +19,8 @@ form.addEventListener('submit', onSubmit);
 function onFormInput(evt) {
   const { email, message } = evt.currentTarget.elements;
   lastFeedback = {
-    lastEmail: email.value,
-    lastMessage: message.value,
+    email: email.value,
+    message: message.value,
   };
   localStorage.setItem(keys.lsFeedback, JSON.stringify(lastFeedback));
   throttledUpdate();
